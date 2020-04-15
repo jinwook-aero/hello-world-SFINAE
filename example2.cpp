@@ -10,7 +10,7 @@
 #include <iostream>
 #include <type_traits>
 
-// Example2: Compile failure
+// Example2: Compile sucess
 template <typename T>
 class OddClass
 {
@@ -22,10 +22,9 @@ public:
 
 int main()
 {
-	int x=1;
-	if(is_odd<int>(x))
+	int x = 1;
+	OddClass<int> theClass;
+	if (theClass.is_odd(x))
 		std::cout << "x is odd" << std::endl;
 	return 0;
 }
-
-// 1>D:\Kindergarten\hello-world-SFINAE\example2.cpp(26,5): error C2065: 'is_odd': undeclared identifier
