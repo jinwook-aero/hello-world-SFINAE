@@ -15,32 +15,23 @@ template <typename T>
 class OddClass
 {
 public:
-	bool is_odd(T i);
+	typename std::enable_if_t<std::is_integral_v<T>, bool>
+		is_odd(T i){ return bool(i % 2); };
+	//bool is_odd(T i);
 };
 
-template <class T>//, typename = std::enable_if_t<std::is_integral<T>::value>
-bool OddClass<T>::is_odd(T i) { return bool(i % 2); }
+//template <typename T, typename Q=T>
+//typename std::enable_if_t<std::is_integral<T>::value, bool
+//OddClass<T>::is_odd(Q i){ return bool(i % 2); }
 
-template<class T,
-	typename = std::enable_if_t<std::is_array<T>::value> >
-	void destroy(T* t) // note: function signature is unmodified
-{
-	for (std::size_t i = 0; i < std::extent<T>::value; ++i) {
-		destroy((*t)[i]);
-	}
-}
-
-/*
-template <typename T>
-typename std::enable_if_t<std::is_integral<T>::value, bool>
-OddClass<T>::is_odd(T i){ return bool(i % 2); }
-*/
 int main()
 {
 	int x = 1;
 	OddClass<int> theClass;
+	OddClass<char> wrongClass;
 	if(theClass.is_odd(x))
 		std::cout << "x is odd" << std::endl;
+	wrongClass.is_odd(x);
 	return 0;
 }
 
