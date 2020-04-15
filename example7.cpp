@@ -30,6 +30,8 @@ public:
 	}
 };
 
+typename std::enable_if_t<std::is_integral_v<U>, bool> is_odd(U i)
+
 int main()
 {
 	int x = 1;
